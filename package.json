@@ -1,0 +1,16 @@
+{
+  "name": "mongoose-mult-tenant-connector",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "mongoose": "^6.1.8"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.5"
+  },
+  "scripts": {
+    "build": "npx tsc -b"
+  },
+  "author": "Gadiel Kaleb <gadiel_kalleb@hotmai.com>"
+}
