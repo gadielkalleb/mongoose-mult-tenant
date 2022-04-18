@@ -65,7 +65,7 @@
  * 
  * nesse caso minha aplicação disponibilizaria serviços que teria acesso aos dados correspondentes,
  * 
- * modelo sugerido: 
+ * 1 - modelo sugerido: 
  * tenant A -
  *  -- Servico USUARIO     ----> |
  *    --- pessoa                 | 
@@ -74,10 +74,24 @@
  *  -- Servico Notificacao ----> |
  *    --- envios
  * 
- * modelo atual
+ * 2 - modelo atual
  * tenant A -
  *    -- pessoa   -->  |
  *    -- endereço -->  |--> São so schemas acessados diretamente.
  *    -- ...      -->  |
  *    -- envios   -->  |
+ * 
+ * 3- outra opcao:
+ *  Servico USUARIO -
+ *    -- recebe o tenant --
+ *    -- checa se o tenant tem acesso ao serviço --
+ *    -- registra suas models na conexão do tenant --
+ *    -- resgata essas models --
+ *    -- usa elas no proprio servico --
+ *    -- PessoaModel -> busca uma pessoa
+ * 
+ * alguns pontos sobre o item acima(3):
+ * * ele tem o dominio dos schemas que ele precisa usar.
+ * * consigo definir se aquele tenant tem acesso ao serviço de USUARIO quando ler as opçoes do tenant.
+ * * não misturo regras de negocio de USUARIOS com outros microserviços
  */
