@@ -12,5 +12,5 @@
   "scripts": {
     "build": "npx tsc -b"
   },
-  "author": "Gadiel Kaleb <gadiel_kalleb@hotmai.com>"
+  "author": "Gadiel Kaleb <gadielkalleb@hotmail.com>"
 }
