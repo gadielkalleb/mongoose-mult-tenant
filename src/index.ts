@@ -212,3 +212,18 @@
 //   }
 
 // }
+
+
+class EntityBuilder {
+  paths: string[];
+
+  constructor(...paths: string[]) {
+    this.paths = paths
+  }
+
+  * loadSchemas() {
+    for (const path of this.paths) {
+      const { schema } = yield import(path)
+    }
+  }
+}
