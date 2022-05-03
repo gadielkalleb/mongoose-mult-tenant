@@ -95,3 +95,120 @@
  * * consigo definir se aquele tenant tem acesso ao serviço de USUARIO quando ler as opçoes do tenant.
  * * não misturo regras de negocio de USUARIOS com outros microserviços
  */
+
+//RASCUNHOS
+
+
+// const pipe = (...functions) => x => functions.reduce((acc, fn) => fn(acc), x);
+
+// const pipeAsyncFunctions = (...fns) => arg => fns.reduce((p, f) => p.then(f), Promise.resolve(arg));
+
+// const compose = (...fns) => fns.reduceRight((f, g) => (...args) => f(g(...args)));
+
+// const httpEvent = {
+//   aws: (parseLambdaEvent, businessLogic, errorHandler) => async  (event) => {
+//     try {
+//       const result = await businessLogic(
+//         parseLambdaEvent(event)
+//       )
+
+//       return {
+//         statusCode: 200,
+//         body: JSON.stringify(result)
+//       }
+//     } catch (error) {
+//       return errorHandler(error)
+//     }
+//   },
+//   azure: (context, req) => { }
+// }
+
+// const lambdaFactory = () => {
+//   const middlewares = []
+
+//   let errorHandler
+//   let businessLogic
+
+//   return {
+//     addMiddlewares: function (...middleware) {
+//       middlewares.push(...middleware)
+//       return this
+//     },
+
+//     addBusinessLogic: function (businessLogicFunction) {
+//       businessLogic = businessLogicFunction
+//       return this
+//     },
+
+//     addErrorHandler: function (errorHandlerfunction) {
+//       errorHandler = errorHandlerfunction
+//       return this
+//     },
+
+//     create: () => {
+
+//       if (!errorHandler) {
+//         throw new Error('error handler not defined!')
+//       }
+
+//       if (!businessLogic) {
+//         throw new Error('business logic not defined!')
+//       }
+
+//       return {
+//         handler: httpEvent[process.env.PROVIDER](
+//           pipeAsyncFunctions(...middlewares),
+//           businessLogic,
+//           errorHandler
+//         )
+//       }
+//     }
+//   }
+// }
+
+// lambdaFactory()
+//   .addMiddlewares(
+//     x => x + 1,
+//     x => x * 1
+//   )
+//   .addBusinessLogic(x => x * 10)
+//   .addErrorHandler(error => { throw new Error(error.message) })
+//   .create()
+
+// const workers = () => {}
+
+// const commonConnection = () => {
+//   return {
+//     connect: async (tenantId) => {
+//       const commonConnection = new EntityLogic(
+//         createConnection(process.env.MONGOURL, { useUnifiedTopology: true, useNewUrlParser: true })
+//       )
+
+//       const tenant = new Tenant()
+
+//       commonConnection.loadTenantSchemas(tenant)
+
+//       const tenantModel = commonConnection.getModel(tenant.collectionName)
+
+//       return tenantModel.find({ name: tenant.collectionName })
+//     }
+//   }
+// }
+
+// class EntityLogic {
+//   constructor(tenantConnection) {
+//     this.tenantConnection = tenantConnection
+//   }
+
+//   loadTenantSchemas(...schemas) {
+//     for(const schema of schemas) {
+//       const schemaName = schema.collectionName
+//       this.tenantConnection.model(schemaName, schema, schemaName)
+//     }
+//   }
+
+//   getModel(modelName) {
+//     return this.tenantConnection.model(modelName) ?? null
+//   }
+
+// }
